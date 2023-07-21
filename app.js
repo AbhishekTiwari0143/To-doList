@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const _ = require("lodash")
@@ -10,10 +11,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 mongoose.set('strictQuery', false);
-const connectDB = async ()=> {
+connect()
+async function connect(){
   try {
-    const connect = await mongoose.connect(process.env.Mongo_URI);
-    console.log(`MongoDB Connected: ${connect.connection.host}`)
+    const connect = await mongoose.connect(process.env.MONGO_URI);
   } catch(error) {
     console.log(error)
     process.exit(1);
